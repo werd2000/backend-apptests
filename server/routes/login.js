@@ -80,6 +80,8 @@ app.post('/google', async(req, res) => {
 
     let token = req.body.idtoken;
 
+    console.log(token);
+
     let googleUser = await verify(token)
         .catch(err => {
             return resp.status(403).json({
