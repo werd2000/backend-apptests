@@ -2,7 +2,12 @@ const mongoose = require('mongoose');
 const uniqueValidator = require('mongoose-unique-validator');
 
 let rolesValidos = {
-    values: ['ADMIN_ROLE', 'USER_ROLE'],
+    values: ['ADMIN_ROLE', 'TERAPEUTA_ROLE', 'USER_ROLE'],
+    message: '{VALUE} no es un valor válido'
+};
+
+let sexosValidos = {
+    values: ['SIN DATOS', 'VARON', 'MUJER'],
     message: '{VALUE} no es un valor válido'
 };
 
@@ -34,6 +39,21 @@ let usuarioSchema = new Schema({
     google: {
         type: Boolean,
         default: false
+    },
+    sexo: {
+        type: String,
+        enum: sexosValidos,
+        default: 'SIN DATOS'
+    },
+    fnac: {
+        type: String,
+        default: ''
+    },
+    img: {
+        type: String
+    },
+    misTests: {
+        type: String
     }
 });
 
@@ -43,7 +63,7 @@ usuarioSchema.methods.toJSON = function() {
     delete userObject.password;
 
     return userObject;
-}
+};
 
 usuarioSchema.plugin(uniqueValidator, { message: '{PATH} debe ser único' });
 
