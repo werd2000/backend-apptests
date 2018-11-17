@@ -137,6 +137,7 @@ app.put('/paciente/:id', verificaToken, (req, res) => {
         paciente.fecha_nac = body.fecha_nac;
         paciente.actualizado = new Date().getTime();
         paciente.cargado_por = body.cargado_por;
+        paciente.img = body.img;
 
         paciente.save((err, pacienteGuardado) => {
             if (err) {

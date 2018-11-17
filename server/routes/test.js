@@ -95,7 +95,7 @@ app.post('/test', verificaToken, function(req, res, next) {
 app.put('/test/:id', [verificaToken, verificaAdminRole], (req, res) => {
 
     let id = req.params.id;
-    let body = _.pick(req.body, ['nombre', 'descripcion', 'tags', 'categoria']);
+    let body = _.pick(req.body, ['nombre', 'descripcion', 'tags', 'categoria', 'img']);
 
     Test.findById(id, (err, test) => {
         if (err) {
@@ -118,6 +118,7 @@ app.put('/test/:id', [verificaToken, verificaAdminRole], (req, res) => {
         test.descripcion = body.descripcion;
         test.categoria = body.categoria;
         test.tags = body.tags;
+        test.img = body.img;
 
         test.save((err, testGuardado) => {
             if (err) {
