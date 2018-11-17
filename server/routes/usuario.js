@@ -94,7 +94,7 @@ app.post('/usuario', function(req, res, next) {
 app.put('/usuario/:id', [verificaToken, verificaAdminRole], (req, res) => {
 
     let id = req.params.id;
-    let body = _.pick(req.body, ['nombre', 'email', 'sexo', 'fnac', 'misTests']);
+    let body = _.pick(req.body, ['nombre', 'email', 'sexo', 'fnac', 'misTests', 'img']);
 
     Usuario.findById(id, (err, usuario) => {
         if (err) {
@@ -117,6 +117,7 @@ app.put('/usuario/:id', [verificaToken, verificaAdminRole], (req, res) => {
         usuario.fnac = body.fnac;
         usuario.sexo = body.sexo;
         usuario.misTests = body.misTests;
+        usuario.img = body.img;
 
         usuario.save((err, usuarioGuardado) => {
             if (err) {
