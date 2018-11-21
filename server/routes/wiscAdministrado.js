@@ -1,6 +1,7 @@
 const express = require('express');
 
 const WiscAdministrado = require('../models/wiscAdministrado');
+const PuntajeObtenido = require('../models/puntajeObtenido');
 const { verificaToken, verificaAdminRole } = require('../middlewares/autenticacion');
 const _ = require('underscore');
 
@@ -166,6 +167,91 @@ app.delete('/wiscadministrado/:id', function(req, res) {
             wiscBorrado
         });
     });
+});
+
+app.post('/puntajeobtenido/:id', verificaToken, function(req, res, next) {
+    let id = req.params.id;
+    let body = req.body;
+
+    let puntaje = new PuntajeObtenido({
+        idWiscAdministrado: id,
+        dc_puntajeobtenido: body.dc_puntajeobtenido,
+        dc_puntajenatural: body.dc_puntajenatural,
+        dc_rp: body.dc_rp,
+        dc_total: body.dc_total,
+        se_puntajeobtenido: body.se_puntajeobtenido,
+        se_puntajenatural: body.se_puntajenatural,
+        se_cv: body.se_cv,
+        se_total: body.se_total,
+        ar_puntajeobtenido: body.ar_puntajeobtenido,
+        ar_puntajenatural: body.ar_puntajenatural,
+        ar_mt: body.ar_mt,
+        ar_total: body.ar_total,
+        bs_puntajeobtenido: body.bs_puntajeobtenido,
+        bs_puntajenatural: body.bs_puntajenatural,
+        bs_vp: body.bs_vp,
+        bs_total: body.bs_total,
+        cd_puntajeobtenido: body.cd_puntajeobtenido,
+        cd_puntajenatural: body.cd_puntajenatural,
+        cd_rp: body.cd_rp,
+        cd_total: body.cd_total,
+        cl_puntajeobtenido: body.cl_puntajeobtenido,
+        cl_puntajenatural: body.cl_puntajenatural,
+        cl_vp: body.cl_vp,
+        cl_total: body.cl_total,
+        cm_puntajeobtenido: body.cm_puntajeobtenido,
+        cm_puntajenatural: body.cm_puntajenatural,
+        cm_cv: body.cm_cv,
+        cm_total: body.cm_total,
+        fi_puntajeobtenido: body.fi_puntajeobtenido,
+        fi_puntajenatural: body.fi_puntajenatural,
+        fi_rp: body.fi_rp,
+        fi_total: body.fi_total,
+        in_puntajeobtenido: body.in_puntajeobtenido,
+        in_puntajenatural: body.in_puntajenatural,
+        in_cv: body.in_cv,
+        in_total: body.in_total,
+        mt_puntajeobtenido: body.mt_puntajeobtenido,
+        mt_puntajenatural: body.mt_puntajenatural,
+        mt_rp: body.mt_rp,
+        mt_total: body.mt_total,
+        nl_puntajeobtenido: body.nl_puntajeobtenido,
+        nl_puntajenatural: body.nl_puntajenatural,
+        nl_mt: body.nl_mt,
+        nl_total: body.nl_total,
+        pc_puntajeobtenido: body.pc_puntajeobtenido,
+        pc_puntajenatural: body.pc_puntajenatural,
+        pc_cv: body.pc_cv,
+        pc_total: body.pc_total,
+        rd_puntajeobtenido: body.rd_puntajeobtenido,
+        rd_puntajenatural: body.rd_puntajenatural,
+        rd_mt: body.rd_mt,
+        rd_total: body.rd_total,
+        rg_puntajeobtenido: body.rg_puntajeobtenido,
+        rg_puntajenatural: body.rg_puntajenatural,
+        rg_vp: body.rg_vp,
+        rg_total: body.rg_total,
+        suma_cv: body.suma_cv,
+        suma_mt: body.suma_mt,
+        suma_op: body.suma_op,
+        suma_vp: body.suma_vp,
+        suma_total: body.suma_total
+    });
+
+    puntaje.save((err, wiscDB) => {
+        if (err) {
+            return res.status(400).json({
+                ok: false,
+                err: err
+            });
+        }
+
+        return res.json({
+            ok: true,
+            puntaje: puntajeDB
+        });
+    });
+
 });
 
 
